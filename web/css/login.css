@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  background-image: url('../img/back1.JPG');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+a{
+  text-decoration: none;
+  color: #C61819;
+}
+
+textarea, input {
+  background-color: #FFFFFF;
+  border: none;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: none;
+}
+
+.form_con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120vh;
+  height: 120vh;
+  background-image: url('../img/loginbackground.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.form_con_flex {
+  text-align: center;
+  margin-top: 20vh;
+}
+
+.form_con_flex h2 {
+  font-size: 1.7rem;
+  color: #C61819;
+}
+
+.header_logo {
+  margin-left: 120px;
+}
+
+.register_top{
+  margin-left: 120px;
+}
+.login_top {
+  margin-left: 120px;
+}
+.register_form. .login_form {
+  margin-right: 40px;
+  color: #C61819;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.form_label {
+  margin-right: 10px;
+  color: #C61819;
+}
+
+.register_form input[type="text"], input[type="email"], input[type="password"], .login_form input[type="text"], input[type="email"], input[type="password"] {
+  font-size: 1.2rem;
+  font-weight: 300;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 4px;
+  background-color: #D5D5D5;
+  border-radius: 15px;
+  /*border: 1px solid red;*/
+}
+
+.register_form input[type="submit"], .login_form  input[type="submit"] {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 150px;
+  padding: 5px;
+  margin: 15px 0 20px 0;
+  background-color: #C61819;
+  border-radius: 30px;
+  border: 2px solid #C61819;
+  margin-left: 120px;
+}
+.login_form  input[type="submit"]{
+  margin-left: 120px;
+}
+
+.register_form input[type="submit"]:hover , .login_form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #FFFFFF;
+  color: #C61819;
+}
+
+.register_bottom, .login_bottom {
+  color: #C61819;
+  font-size: 0.8rem;
+  margin-left: 120px;
+}
+.login_bottom {
+  margin-left: 120px;
+}

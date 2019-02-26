@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Sklep{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <header>
+        {% block header %}{% endblock %}
+        </header>
+        <main>
+        {% block main %}{% endblock %}
+        </main>
+        <footer>
+        {% block footer %}{% endblock %}
+        </footer>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

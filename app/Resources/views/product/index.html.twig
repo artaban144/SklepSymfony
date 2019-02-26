@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+      <div class="header_top">
+        <div class="logo_top"><a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a></div>
+        <div class="search" style="max-width: 378px; height: 44px; border: 1px solid #CCC; border-radius: 40px; background-color: #FFFFFF">
+          <input type="text" style=" width: 70%; border: none; font-size: 1.7rem; margin-left: 20px; background-color: #FFFFFF">
+          <div class="icon-search-con"><i class="icon-search"></i></div>
+        </div>
+        <div class="menu"><a href="/cart">Koszyk</a> <span>|</span> <a href="#">Kontakt</a> <span>|</span> <a href="#">Zarejestruj</a> <span>|</span> <a href="#">Zaloguj</a></div>
+      </div>
+
+      <div class="header_text"><span><b>LEPSZY</b><br> POZIOM JAZDY</span></div>
+
+      <div class="border"></div>
+{% endblock %}
+{% block main %}
+<div class="content" style="border-top: 35px solid #C61819;">
+      <div class="border_curve"></div>
+
+
+      <nav class="sidebar">
+        <h1>KATEGORIE</h1>
+        {% set currLevel = 0  %}
+        {% set prevLevel = -1 %}
+      
+        {% import 'product/macros.twig' as macro %}
+        <ol class="ol_menu">
+        {{ macro.createTree(categories, 0, currLevel, prevLevel) }}
+        </ol>
+
+        </nav>
+
+
+      <div class="products_container">
+
+        <h1 class="products_header">Najnowsze Produkty</h1>
+
+        <div class="products_list">
+
+        {% for product in products %}
+          <div class="product">
+            <a href="/product/{{product.id}}"><div class="product_photo" style="background-image: url('/img/products/{{product.id}}.jpg')"></div></a>
+            <div class="product_labels">
+              <div class="product_name">{{product.name}}</div>
+              <div class="product_price">{{product.price}}</div>
+              <a href="/cart/add-to-cart/{{ product.id }}"><button class="add_to_cart" type="button" name="add_to_cart">Dodaj do koszyka</button></a>
+            </div>
+          </div>
+
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+      <div class="navigation">
+    {{ knp_pagination_render(products) }}
+      </div>
+{% endblock %}
+{% block footer %}
+      <div class="write_to_us_con">
+
+      <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
+        <div class="write_to_us_form_con">
+          <div class="top_text">
+          <h1>Masz pytania? Napisz do nas</h1>
+          </div>
+          <div class="top">
+            <input type="text" name="" value="" placeholder="Imię">
+            <input type="text" name="" value="" placeholder="Adres E-mail">
+          </div>
+          <div class="bottom">
+            <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
+          </div>
+        </div>
+        <input type="submit" name="" value="Wyślij">
+
+      </form>
+    </div>
+
+      <div class="logo_footer">
+        <img src="img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+      </div>
+{% endblock %}
