@@ -56,7 +56,6 @@ public function addAction($id, Request $request){
 
     // $session->set('items', "");
 
-
     $cart = $session->get('items');
 
     if($cart == null) {

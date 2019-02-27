@@ -1,3 +1,27 @@
+<style>
+form{
+    display: flex;
+}
+input[type=text], input[type=email]{
+  width: 220px;
+  height: 20px;
+  margin-top: 5px;
+  font-size: 1rem;
+  padding: 2px 10px 2px 10px;
+  float: right;
+  border-radius: 10px;
+  border: 1px solid #DFDFDF;
+  /*border: none;*/
+  background-color:#DFDFDF; 
+}
+div div{
+    height: 50px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+</style>
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
