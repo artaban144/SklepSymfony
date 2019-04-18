@@ -1,84 +1,187 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    <div class="header_top">
-        <div class="logo_top"><a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a></div>
-
-        <div class="menu"><a href="#">Kontakt</a> <span>|</span> <a href="#">Zarejestruj</a> <span>|</span> <a href="#">Zaloguj</a></div>
+  <div class="header_top">
+    <div class="logo_top">
+      <a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a>
     </div>
 
-    <div class="header_text"><span><b>LEPSZY</b><br> POZIOM JAZDY</span></div>
+    <div class="menu">
+      <a href="#">Kontakt</a>
+      <span>|</span>
+      <a href="#">Zarejestruj</a>
+      <span>|</span>
+      <a href="#">Zaloguj</a>
+    </div>
+  </div>
 
-    <div class="border"></div>
+  <div class="header_text">
+    <span>
+      <b>LEPSZY</b><br>
+      POZIOM JAZDY</span></div>
+
+  <div class="border"></div>
 {% endblock %}
 
 {% block main %}
 
-<div class="content content_cart">
+  <div class="content content_cart">
     <div class="cart_strap">
-        <span class="checked">TWÓJ KOSZYK</span>
-        <span>DOSTAWA I PŁATNOŚĆ</span>
-        <span>PODSUMOWANIE</span>
+      <span class="checked">TWÓJ KOSZYK</span>
+      <span>DOSTAWA I PŁATNOŚĆ</span>
+      <span>PODSUMOWANIE</span>
     </div>
-    <div class="pedzel pedzel_left"><span>TWÓJ KOSZYK</span></div>
+    <div class="pedzel pedzel_left">
+      <span>TWÓJ KOSZYK</span></div>
     <br>
 
     <div class="cart_help_container">
-        <div class="cart_items_labels">
-            <span>Ilość</span>
-            <span>Cena</span>
-            <span>Usuń z koszyka</span>
-        </div>
-        <div class="cart_items">
+      <div class="cart_items_labels">
+        <span>Ilość</span>
+        <span>Cena</span>
+        <span>Usuń z koszyka</span>
+      </div>
+      <div class="cart_items">
 
-            {% for item in cart %}
+        {% for item in cart %}
+          {% include 'cart/cart.item.html.twig'%}
+        {% endfor %}
 
-            <div class="cart_item_container">
-                <div class="cart_item_name"><span>{{item['name']}}</span></div>
-                <div class="cart_item_rest">
-                    <span> <button id='{{item['id']}}' class='decrease_amount'></button> <span><input type='text' class='cart_amount_input' id='cart_amount_{{item['id']}}' value='{{item['count']}}'></span><button id='{{item['id']}}' class='increase_amount'></button></span>
-                    <span>{{item['price']}}</span>
-                    <a href="/cart/delete-from-cart/{{item['id']}}"><span id='{{item['id']}}' class='del_from_cart' style='cursor: pointer; display: flex; align-items: center; justify-content: space-around'><div style='position: relative'><div class='delete_cross_left' style=' top: -9px; position: absolute; transform: rotate(45deg); width: 3px; height: 20px; background-color: #FFFFFF'></div><div class='delete_cross_right' style='position: absolute; top: -9px;transform: rotate(-45deg); width: 3px; height: 20px; background-color: #FFFFFF'></div></div></span></a>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
+      </div>
     </div>
-</div>
-<div class="cart_price_container">
+  </div>
+  <div class="cart_price_container">
     <div class="cart_price">
-        <span>Razem:</span>
-        <span id="cart_price"></span>
+      <span>Razem:</span>
+      <div id="cart_price" style="margin-right: 20px">{{ cartPrice }}</div>
     </div>
-</div>
-<br><br>
-<div class="cart_button_container">
-    <a href="/realization"><button class="next_button" style="margin-right:20px">Dalej</button></a>
-</div>
+  </div>
+  <br><br>
+  <div class="cart_button_container">
+    <a href="/realization-get-data">
+      <button class="next_button" style="margin-right:20px">Dalej</button>
+    </a>
+  </div>
 
 {% endblock %}
 
 {% block footer %}
 
-    <div class="write_to_us_con">
-        <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
-            <div class="write_to_us_form_con">
-                <div class="top_text">
-                    <h1>Masz pytania? Napisz do nas</h1>
-                </div>
-                <div class="top">
-                    <input type="text" name="" value="" placeholder="Imię">
-                    <input type="text" name="" value="" placeholder="Adres E-mail">
-                </div>
-                <div class="bottom">
-                    <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
-                </div>
-            </div>
-            <input type="submit" name="" value="Wyślij">
-        </form>
-    </div>
-    <div class="logo_footer">
-        <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
-    </div>
+  <div class="write_to_us_con">
+    <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
+      <div class="write_to_us_form_con">
+        <div class="top_text">
+          <h1>Masz pytania? Napisz do nas</h1>
+        </div>
+        <div class="top">
+          <input type="text" name="" value="" placeholder="Imię">
+          <input type="text" name="" value="" placeholder="Adres E-mail">
+        </div>
+        <div class="bottom">
+          <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
+        </div>
+      </div>
+      <input type="submit" name="" value="Wyślij">
+    </form>
+  </div>
+  <div class="logo_footer">
+    <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $('body').on('click', '.decrease_amount', function(){
+        id = $(this).attr('id');
+        url = '/cart/amount/'+id;
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "id" : id,
+                "type": 'dec'
+            },
+            async: true,
+            success: function (data)
+            {
+                $("#cart_price").html(data['cartPrice']);
+                countlabelId = '#cart_amount_' + id;
+                productCount = parseInt($(countlabelId).val()) - 1;
+                if(productCount == 0){
+                  cartItemConId = '#cart_item_con_' + id;
+                  $(cartItemConId).hide();
+                }
+                else{
+                  $(countlabelId).val(productCount);
+                }
+
+
+            }
+        });
+        return false;
+    });
+
+    $('body').on('click', '.increase_amount', function(){
+        id = $(this).attr('id');
+        url = '/cart/amount/'+id;
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "id" : id,
+                "type": 'inc'
+            },
+            async: true,
+            success: function (data)
+            {
+                $("#cart_price").html(data['cartPrice']);
+                countlabelId = '#cart_amount_' + id;
+                productCount = parseInt($(countlabelId).val()) + 1;
+                if(productCount == 0){
+                  cartItemConId = '#cart_item_con_' + id;
+                  $(cartItemConId).hide();
+                }
+                else{
+                  $(countlabelId).val(productCount);
+                }
+
+            }
+        });
+        return false;
+    });
+
+    $('body').on('change', '.cart_amount_input', function(){
+        id =  $(this).attr('id').substr(12);
+        newValue = $(this).val();
+        url = '/cart/amount/'+id;
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "id" : id,
+                "type": 'val',
+                "value": newValue,
+            },
+            async: true,
+            success: function (data)
+            {
+                $("#cart_price").html(data['cartPrice']);
+                countlabelId = '#cart_amount_' + id;
+                productCount = parseInt($(countlabelId).val()) + 1;
+                if(productCount <= 1 ){
+                  cartItemConId = '#cart_item_con_' + id;
+                  $(countlabelId).val(1);
+                }
+                else{
+                  $(countlabelId).val(newValue);
+                }
+
+            }
+        });
+        return false;
+    });
+</script>
 {% endblock %}

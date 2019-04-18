@@ -1,0 +1,20 @@
+<div class="cart_item_container" id="cart_item_con_{{ item['id'] }}">
+  <div class="cart_item_name">
+    <span>{{item['name']}}</span></div>
+  <div class="cart_item_rest">
+    <span>
+      <button id='{{item['id']}}' class='decrease_amount'> < </button>
+      <span><input type='text' class='cart_amount_input' id='cart_amount_{{item['id']}}' value='{{item['count']}}'></span>
+      <button id='{{item['id']}}' class='increase_amount'> > </button>
+    </span>
+    <span>{{item['price']}}</span>
+    <a href="/cart/delete-from-cart/{{item['id']}}">
+      <span id='{{item['id']}}'="id']}}'" class='del_from_cart' style='cursor: pointer; display: flex; align-items: center; justify-content: space-around'>
+        <div style='position: relative'>
+          <div class='delete_cross_left' style=' top: 0px; position: absolute; transform: rotate(45deg); width: 3px; height: 20px; background-color: #FFFFFF'></div>
+          <div class='delete_cross_right' style='position: absolute; top: 0px;transform: rotate(-45deg); width: 3px; height: 20px; background-color: #FFFFFF'></div>
+        </div>
+      </span>
+    </a>
+  </div>
+</div>

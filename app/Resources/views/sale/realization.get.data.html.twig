@@ -1,0 +1,306 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+<!-- <style>
+  form {
+    display: flex;
+  }
+  input[type=email],
+  input[type=text] {
+    width: 220px;
+    height: 20px;
+    margin-top: 5px;
+    font-size: 1rem;
+    padding: 2px 10px;
+    float: right;
+    border-radius: 10px;
+    border: 1px solid #DFDFDF;
+    /*border: none;*/
+    background-color: #DFDFDF;
+  }
+  div div {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style> -->
+
+  <div class="header_top">
+    <div class="logo_top">
+      <a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a>
+    </div>
+
+    <div class="menu">
+      <a href="#">Kontakt</a>
+      <span>|</span>
+      <a href="#">Zarejestruj</a>
+      <span>|</span>
+      <a href="#">Zaloguj</a>
+    </div>
+  </div>
+
+  <div class="header_text">
+    <span>
+      <b>LEPSZY</b><br>
+      POZIOM JAZDY</span></div>
+  <div class="border"></div>
+{% endblock %}
+
+{% block main %}
+
+<div class='form-temp'>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+</div>
+<style>
+  .form-temp{
+    width: 500px;
+    display: flex;
+    margin: auto;
+    margin-top: 70px;
+  }
+  .form-temp form div div{
+    display: flex;
+    margin-bottom: 5px;
+  }
+    .form-temp form div div label{
+      width: 30%;
+      float: left;
+    }
+    .form-temp form div div input{
+      width: 70%;
+      float: left;
+    }
+    .form-temp form div div:nth-child(9){
+      display: flex;
+      flex-direction: column;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId{
+      display: flex;
+      flex-direction: column;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId input{
+      margin-top: 20px;
+      width: 40px;
+      float: left;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId label{
+      width: 500px;
+      float: left;
+    }
+    #realization_Podsumowanie{
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 5px 30px;
+      background-color: #C61819;
+      border: 2px solid #C61819;
+      color: #FFFFFF;
+      border-radius: 12px;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    #realization_Podsumowanie:hover{
+      background-color: #FFFFFF;
+      color: #C61819;
+    }
+
+</style>
+
+<div class="cart_strap">
+  <span>TWÓJ KOSZYK</span>
+  <span  class="checked">DOSTAWA I PŁATNOŚĆ</span>
+  <span>PODSUMOWANIE</span>
+</div>
+<div class="pedzel pedzel_long_left"><span>DOSTAWA I PŁATNOŚĆ</span></div>
+<br>
+<div class="realization_sections_container">
+  <div class='realization_section'>
+    <span class='realization_section_header'><span>1. </span>DANE DO WYSYŁKI</span>
+
+    <div class="realization_section_client_info_form_container">
+
+
+    <form class="realization_section_client_info_form" id="form_shipment_data">
+
+      <div class='realization_form_item shipment_first_name_container' id='shipment_first_name_container'><span>Imię: </span><input type="text" name="shipment_first_name" value=""></div>
+      <div class='realization_form_item shipment_last_name_container' id='shipment_last_name_container'><span>Nazwisko: </span><input type="text" name="shipment_last_name" value=""></div>
+      <div class='realization_form_item shipment_address_container' id='shipment_address_container'><span>Adres: </span><input type="text" name="shipment_address" value=""></div>
+      <div class='realization_form_item shipment_postal_code_container' id='shipment_postal_code_container'><span>Kod pocztowy: </span><input type="text" name="shipment_postal_code" value=""></div>
+      <div class='realization_form_item shipment_city_container' id='shipment_city_container'><span>Miasto: </span><input type="text" name="shipment_city" value=""></div>
+      <div class='realization_form_item shipment_country_container' id='shipment_country_container'><span>Kraj: </span><input type="text" name="shipment_country" value=""></div>
+      <div class='realization_form_item shipment_email_container' id='shipment_email_container'><span>Adres E-mail: </span><input type="text" name="shipment_email" value=""></div>
+      <div class='realization_form_item shipment_phone_number_container' id='shipment_phone_number_container'><span>Numer telefonu: </span><input type="text" name="shipment_phone_number" value=""></div>
+    </form>
+
+
+  </div>
+  </div>
+
+  <div class='realization_section'>
+    <span class='realization_section_header'><span>2. </span>DOSTAWA</span>
+    <span class='realization_section_subheader'>Wybierz sposób dostawy</span>
+    <div class="list_shipment realization_section_list_shipment radio_checkbox">
+      <form class="" id='form_shipment' method="post">
+      </form>
+    </div>
+  </div>
+
+  <div class='realization_section'>
+    <span class='realization_section_header'><span>3. </span>PŁATNOŚĆ</span>
+    <span class='realization_section_subheader'>Wybierz sposób płatności</span>
+    <div class="list_payment realization_section_list_payment radio_checkbox">
+      <form class="" id='form_payment' method="post">
+      <input type="radio" form='form_payment' value="przlew_bankowy" name="payment" id='prl2'><label for='prl2'>Przelew bankowy<label><br>
+      <input type="radio" form='form_payment' value="przy_odbiorze" name="payment" id='prl3'><label for='prl3'>Płatność przy odbiorze<label><br>
+      </form>
+    </div>
+  </div>
+
+  <div class='realization_section'>
+    <span class='realization_section_header'><span>4. </span>FAKTURA</span>
+    <div class='realization_section_list_facture_cb radio_checkbox'><input type="checkbox" form='form_realization' id="facture_cb" name="" value=""><label for="facture_cb">Chcę otrzymać fakturę VAT</label></div>
+      <div class="facture_data_form realization_section_client_info_form" style='display: none; margin-top: 30px'>
+        <span style='display: table; margin-bottom: 15px; border-bottom: 2px solid #C61819;'>Dane do faktury:</span>
+
+
+        <form class="realization_section_client_info_form" id='form_facture_data' method="post">
+        <div class='realization_form_item facture_first_name_container' id='facture_first_name_container'><span>Imię: </span><input type="text" name="facture_first_name" value=""></div>
+        <div class='realization_form_item facture_last_name_container' id='facture_last_name_container'><span>Nazwisko: </span><input type="text" name="facture_last_name" value=""></div>
+        <div class='realization_form_item facture_address_container' id='facture_address_container'><span>Adres: </span><input type="text" name="facture_address" value=""></div>
+        <div class='realization_form_item facture_postal_code_container' id='facture_postal_code_container'><span>Kod pocztowy: </span><input type="text" name="facture_postal_code" value=""></div>
+        <div class='realization_form_item facture_city_container' id='facture_city_container'><span>Miasto: </span><input type="text" name="facture_city" value=""></div>
+        <div class='realization_form_item facture_country_container' id='facture_country_container'><span>Kraj: </span><input type="text" name="facture_country" value=""></div>
+        <div class='realization_form_item facture_text_container' id='facture_email_container'><span>Adres E-mail: </span><input type="facture_text" name="email" value=""></div>
+        <div class='realization_form_item facture_phone_number_container' id='facture_phone_number_container'><span>Numer telefonu: </span><input type="facture_text" name="phone_number" value=""></div>
+      </form>
+
+
+      </div>
+  </div>
+
+  <div class='realization_section'>
+    <span class='realization_section_header'><span>5. </span>UWAGI KLIENTA</span>
+    <textarea id='form_client_comments' class='realization_clientcomments_ta' form='form_client_comments' name="client_comments" rows="8" placeholder="Przekaż nam Swoje uwagi do zamówienia"></textarea>
+  </div>
+
+  <div class='realization_section'>
+    <div class='realization_section_list_regulations_cb radio_checkbox'>
+    <form class="" id='form_regulations' method="post">
+    <input type="checkbox" form='form_regulations' id="cb2" name="regulations" value="1"><label for="cb2">Zapoznałem się i akceptuje regulamin i politykę prywatnośći sklepu sickride.pl</label></div>
+  </form>
+    <div class="realization_section_list_regulations_links">
+    <span>Regulamin sklepu: <a href="">Przeczytaj</a></span>
+    <span>Polityka prywatności: <a href="">Przeczytaj</a></span>
+    </div>
+  </div>
+
+  <div class='realization_section'>
+    <div class='realization_section_buttons'>
+      <a href="cart"><button class='button_red realization_button' type="button" name="button">Powrót do koszyka</button></a>
+      <button id='summary_button' class='button_red realization_button' type="button" name="button">Podsumowanie</button>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+  <div class="write_to_us_con">
+    <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
+      <div class="write_to_us_form_con">
+        <div class="top_text">
+          <h1>Masz pytania? Napisz do nas</h1>
+        </div>
+        <div class="top">
+          <input type="text" name="" value="" placeholder="Imię">
+          <input type="text" name="" value="" placeholder="Adres E-mail">
+        </div>
+        <div class="bottom">
+          <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
+        </div>
+      </div>
+      <input type="submit" name="" value="Wyślij">
+    </form>
+  </div>
+  <div class="logo_footer">
+    <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$('.realization_form_item').on('keyup', function(event){
+  if (event.keyCode === 13) {
+ console.log("enter");
+ $(this).find('input').blur();
+ $(this).next('.realization_form_item').find('input').focus();
+
+  }
+});
+
+$('.realization_form_item').on('focusout', function(){
+  id = this.id;
+  var value = $(this).find('input').val();
+  if(value.length > 0){
+    if(id=='facture_email_container' || id=='shipment_email_container'){
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var test = re.test(String(value).toLowerCase());
+      if(test == true){
+        $(this).removeClass('wrong');
+        $(this).addClass('correct');
+      }
+      else{
+        $(this).removeClass('correct');
+        $(this).addClass('wrong');
+      }
+    }
+    else if(id=='facture_phone_number_container' || id=='shipment_phone_number_container'){
+      var re = /^(?:\(?\+?48)?(?:[-\.\(\)\s]*(\d)){9}\)?$/;
+      var test = re.test(String(value).toLowerCase());
+      if(test == true){
+        $(this).removeClass('wrong');
+        $(this).addClass('correct');
+      }
+      else{
+        $(this).removeClass('correct');
+        $(this).addClass('wrong');
+      }
+    }
+    else if(id=='facture_postal_code_container' || id=='shipment_postal_code_container'){
+      var re = /^[\d]{2}-[\d]{3}$/;
+      var test = re.test(String(value).toLowerCase());
+      if(test == true){
+        $(this).removeClass('wrong');
+        $(this).addClass('correct');
+      }
+      else{
+        $(this).removeClass('correct');
+        $(this).addClass('wrong');
+      }
+    }
+    else{
+      $(this).addClass('correct');
+    }
+  }
+  else{
+    $(this).removeClass('correct');
+  }
+});
+
+
+$(document).ready(function() {
+  $('#facture_cb').change(function() {
+     if(this.checked) {
+$('.facture_data_form').show('fast');
+     }
+     else{
+       $('.facture_data_form').hide('fast');
+     }
+   });
+});
+</script>
+{% endblock %}

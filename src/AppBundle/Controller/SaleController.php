@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Realization;
+use AppBundle\Entity\Shipment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,80 +14,98 @@ use AppBundle\Form\RealizationType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Service\ShipmentList;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class SaleController extends Controller
 {
     /**
-     * @Route("/realization", name="realization")
+     * @Route("/realization-get-data", name="realization_get_data")
      */
 
-    public function realizationAction(Request $request, CartPrice $cartPriceGetter){
+    public function realizationGetDataAction(Request $request, CartPrice $cartPriceGetter, ShipmentList $getShipmentList)
+    {
+        $shipmentList = $getShipmentList->getShipmentList();
+        $realization = new Realization();
 
-        $defaultData = [
-            'name' => 'Piotr',
-            'lastName' => 'Polok',
-            'email' => 'p@p.pl',
-            'phoneNumber' => '123123123',
-            'country' => 'Polska',
-            'city' => 'Wisła',
-            'postalCode' => '43-460',
-            'address' => 'Kopydło 14'
-        ];
+        $form = $this->createForm(RealizationType::class, $realization, [
+            'data' => $shipmentList,
+        ]);
 
-        $form = $this->createFormBuilder($defaultData)
-            ->add('name', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('phoneNumber', TextType::class)
-            ->add('country', TextType::class)            
-            ->add('city', TextType::class)            
-            ->add('postalCode', TextType::class)            
-            ->add('address', TextType::class)            
-            ->add('submit', SubmitType::class)
-            ->getForm();
-
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $realization = $form->getData();
+
+            unset($realization['0'], $realization['1'], $realization['2'], $realization['3']); //?????????????????????
 
             $session = $this->get('session');
-            $cart = $session->get('items');
 
-            $cartPrice = $cartPriceGetter->getCartPrice($cart);
-            $data = $form->getData();
+            $encoders = [new JsonEncoder()];
+            $normalizers = [new ObjectNormalizer()];
+            $serializer = new Serializer($normalizers, $encoders);
 
-            $dateTime = new \DateTime();
+            $jsonRealization = $serializer->serialize($realization, 'json');
+            $session->set('realization', $jsonRealization);
 
-            $realization = new Realization();
-            $realization->setUserId(1);
-            $realization->setDate($dateTime);
-            $realization->setName($data['name']);
-            $realization->setLastName($data['lastName']);
-            $realization->setEmail($data['email']);
-            $realization->setPhoneNumber($data['phoneNumber']);
-            $realization->setCountry($data['country']);
-            $realization->setCity($data['city']);
-            $realization->setPostalCode($data['postalCode']);
-            $realization->setAddress($data['address']);
-            $realization->setShipmentId(1);
-            $realization->setCart($cart);
-            $realization->setPrice($cartPrice);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($realization);
-            $entityManager->flush();
-
-        return new Response("<h1>Pomyślnie zrealizowano zamówienie</h1>");
-
-            
-        }
-        else{
+            return $this->redirectToRoute('realization_summary');
         }
 
+        return $this->render('/sale/realization.get.data.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/realization_summary", name="realization_summary")
+     */
+    public function realizationSummaryAction()
+    {
+        $session = $this->get('session');
+        $realization = json_decode($session->get('realization'), true);
 
-    return $this->render('/sale/realization.html.twig', [
-        'form' => $form->createView(),
-    ]);
+        $shipment = $this->getDoctrine()
+      ->getRepository(Shipment::class)
+      ->find($realization['shipmentId']);
 
+
+        return $this->render('/sale/realization.summary.html.twig', [
+            'formData' => $realization,
+            'shipmentLabel' =>$shipment->getName(),
+        ]);
+    }
+
+    /**
+     * @Route("/realization", name="realization")
+     */
+    public function realizationAction(Request $request, CartPrice $cartPriceGetter)
+    {
+        $session = $this->get('session');
+
+        $cart = $session->get('items');
+        $cartPrice = $cartPriceGetter->getCartPrice($cart);
+
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonRealization = $session->get('realization');
+        $realization = $serializer->deserialize($jsonRealization, Realization::class, 'json');
+
+        $realization->setUserId("1");
+        $realization->setDate(new \DateTime("now"));
+        $realization->setCart($cart);
+
+        $realization->setPrice($cartPrice);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($realization);
+        $entityManager->flush();
+
+        $session->set('items', "");
+
+        return $this->render('/sale/realization.success.html.twig');
     }
 }

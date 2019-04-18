@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+  <div class="header_top">
+    <div class="logo_top">
+      <a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a>
+    </div>
+    <div class="menu">
+      <a href="/cart">Koszyk</a>
+      <span>|</span>
+      <a href="#">Kontakt</a>
+      <span>|</span>
+      <a href="#">Zarejestruj</a>
+      <span>|</span>
+      <a href="#">Zaloguj</a>
+    </div>
+  </div>
+  <div class="header_text">
+    <span>
+      <b>LEPSZY</b><br>
+      POZIOM JAZDY</span></div>
+
+  <div class="border"></div>
+{% endblock %}
+
+{% block main %}
+
+  <div class="content_product">
+    <div class="product_top_container">
+      <div class="left">
+        <div id='product_top_image' class="product_top_image" style="background-image: url('/img/products/{{product.id}}.jpg')"></div>
+      </div>
+      <div class="right">
+        <div class="pedzel_long_left">
+          <span>{{ product.name }}</span>
+        </div>
+        <div class="product_top_description">{{ product.longDescription }}</div>
+        <div class="product_top_price">{{ product.price }}</div>
+        <a href="/cart/add-to-cart/{{ product.id }}">
+          <button class="product_top_addtocart add_to_cart">Dodaj do koszyka</button>
+        </a>
+      </div>
+    </div>
+    <div class="product_bottom_container">
+      <div class="pedzel product_bottom_pedzel">
+        <span>Dane techniczne</span>
+      </div>
+      <div class="product_bottom_properties">
+        {% for property in properties %}
+          {% set property = property | split('=') %}
+          <div class="product_property_container">
+            <div class="product_property_item product_property_name">{{property[0]}}</div>
+            <div class="product_property_item product_property_value">{{property[1]}}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+<div class="write_to_us_con">
+  <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
+    <div class="write_to_us_form_con">
+      <div class="top_text">
+        <h1>Masz pytania? Napisz do nas</h1>
+      </div>
+      <div class="top">
+        <input type="text" name="" value="" placeholder="Imię">
+        <input type="text" name="" value="" placeholder="Adres E-mail">
+      </div>
+      <div class="bottom">
+        <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
+      </div>
+    </div>
+    <input type="submit" name="" value="Wyślij">
+  </form>
+</div>
+<div class="logo_footer">
+  <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+</div>
+{% endblock %}

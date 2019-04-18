@@ -23,8 +23,8 @@
         <h1>KATEGORIE</h1>
         {% set currLevel = 0  %}
         {% set prevLevel = -1 %}
-      
-        {% import 'product/macros.twig' as macro %}
+
+        {% import 'home/macros.twig' as macro %}
         <ol class="ol_menu">
         {{ macro.createTree(categories, 0, currLevel, prevLevel) }}
         </ol>
@@ -47,8 +47,8 @@
               <a href="/cart/add-to-cart/{{ product.id }}"><button class="add_to_cart" type="button" name="add_to_cart">Dodaj do koszyka</button></a>
             </div>
           </div>
-
         {% endfor %}
+
         </div>
       </div>
     </div>
@@ -78,6 +78,38 @@
     </div>
 
       <div class="logo_footer">
-        <img src="img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+        <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
       </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $('body').on('click', '.category-list-item', function(){
+
+    id = $(this).attr('id').substr(4);
+    console.log(id);
+    url = '/category/'+id;
+    console.log(url);
+    $.ajax({
+        url: url,
+        type: "POST",
+        dataType: "json",
+        data: {
+            "id" : id,
+        },
+        async: false,
+        success: function (data)
+        {
+          console.log(data)
+        },
+        error: function (jqXHR, status, err) {
+          console.log(err);
+    },
+    });
+    console.log(url);
+    window.history.pushState(url, 'Kategoria', url);
+    return false;
+    });
+
+</script>
 {% endblock %}

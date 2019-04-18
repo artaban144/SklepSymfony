@@ -1160,6 +1160,20 @@ li .menu_label+input[type=checkbox]:checked .menu_label::before {
   /*margin: 0 50px 0 50px;*/
 }
 
+.summary-con{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  margin: auto;
+  margin-top: 50px;
+}
+.summary-item div{
+width: 250px;
+float: left;
+}
+
 .realization_sections_container {
   display: flex;
   flex-direction: column;

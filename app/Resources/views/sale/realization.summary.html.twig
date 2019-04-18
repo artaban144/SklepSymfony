@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+<!-- <style>
+  form {
+    display: flex;
+  }
+  input[type=email],
+  input[type=text] {
+    width: 220px;
+    height: 20px;
+    margin-top: 5px;
+    font-size: 1rem;
+    padding: 2px 10px;
+    float: right;
+    border-radius: 10px;
+    border: 1px solid #DFDFDF;
+    /*border: none;*/
+    background-color: #DFDFDF;
+  }
+  div div {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style> -->
+
+  <div class="header_top">
+    <div class="logo_top">
+      <a href="/"><img src="/img/logo.png" class="header_logo" alt=""></a>
+    </div>
+
+    <div class="menu">
+      <a href="#">Kontakt</a>
+      <span>|</span>
+      <a href="#">Zarejestruj</a>
+      <span>|</span>
+      <a href="#">Zaloguj</a>
+    </div>
+  </div>
+
+  <div class="header_text">
+    <span>
+      <b>LEPSZY</b><br>
+      POZIOM JAZDY</span></div>
+  <div class="border"></div>
+{% endblock %}
+
+{% block main %}
+
+<div class="cart_strap">
+  <span>TWÓJ KOSZYK</span>
+  <span>DOSTAWA I PŁATNOŚĆ</span>
+  <span class="checked">PODSUMOWANIE</span>
+</div>
+<div class="pedzel pedzel_long_left"><span>DOSTAWA I PŁATNOŚĆ</span></div>
+
+<div class="summary-con">
+  <div class="summary-item">
+    <div>Imię: </div>
+    <div>{{formData['name']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Nazwisko: </div>
+    <div>{{formData['lastname']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Adres: </div>
+    <div>{{formData['address']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Kod pocztowy: </div>
+    <div>{{formData['postalCode']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Miejscowość: </div>
+    <div>{{formData['city']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>kraj: </div>
+    <div>{{formData['country']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Adres email: </div>
+    <div>{{formData['email']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Numer telefonu: </div>
+    <div>{{formData['phoneNumber']}}</div>
+  </div>
+  <div class="summary-item">
+    <div>Rodzaj wysyłki: </div>
+    <div>{{shipmentLabel}}</div>
+  </div>
+
+<a href="realization"><button style="margin-top: 50px" class='button_red realization_button' type="button" name="button">Wykonaj zamówienie</button></a>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+  <div class="write_to_us_con">
+    <form class="write_to_us_form" id="write_to_us_form" action="#" method="post">
+      <div class="write_to_us_form_con">
+        <div class="top_text">
+          <h1>Masz pytania? Napisz do nas</h1>
+        </div>
+        <div class="top">
+          <input type="text" name="" value="" placeholder="Imię">
+          <input type="text" name="" value="" placeholder="Adres E-mail">
+        </div>
+        <div class="bottom">
+          <textarea name="name" form="write_to_us_form" rows="8" placeholder="Wiadomość"></textarea>
+        </div>
+      </div>
+      <input type="submit" name="" value="Wyślij">
+    </form>
+  </div>
+  <div class="logo_footer">
+    <img src="/img/logo.png" class="footer_logo" alt="logo sickride" style="transform: scale(0.6)">
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+</script>
+{% endblock %}
