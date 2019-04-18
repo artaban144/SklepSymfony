@@ -16,45 +16,33 @@
 {% endblock %}
 {% block main %}
 <div class="content" style="border-top: 35px solid #C61819;">
-      <div class="border_curve"></div>
+    <div class="border_curve"></div>
 
-
-      <nav class="sidebar">
+    <nav class="sidebar">
         <h1>KATEGORIE</h1>
         {% set currLevel = 0  %}
         {% set prevLevel = -1 %}
-
         {% import 'home/macros.twig' as macro %}
         <ol class="ol_menu">
         {{ macro.createTree(categories, 0, currLevel, prevLevel) }}
         </ol>
-
-        </nav>
-
+    </nav>
 
       <div class="products_container">
-
         <h1 class="products_header">Najnowsze Produkty</h1>
-
         <div class="products_list">
-
-        {% for product in products %}
-          <div class="product">
-            <a href="/product/{{product.id}}"><div class="product_photo" style="background-image: url('/img/products/{{product.id}}.jpg')"></div></a>
-            <div class="product_labels">
-              <div class="product_name">{{product.name}}</div>
-              <div class="product_price">{{product.price}}</div>
-              <a href="/cart/add-to-cart/{{ product.id }}"><button class="add_to_cart" type="button" name="add_to_cart">Dodaj do koszyka</button></a>
-            </div>
-          </div>
-        {% endfor %}
-
+          {% for product in products %}
+            {% include 'home/home.product.html.twig'%}
+          {% endfor %}
         </div>
       </div>
+
     </div>
+
       <div class="navigation">
     {{ knp_pagination_render(products) }}
       </div>
+
 {% endblock %}
 {% block footer %}
       <div class="write_to_us_con">

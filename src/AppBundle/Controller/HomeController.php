@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $categories = $categoryTreeMaker->getCategoryTree();
 
-        return $this->render('home/index.html.twig', array(
+        return $this->render('home/home.html.twig', array(
             'products' => $result,
             'cart' => $this->get('session')->get('items'),
             'categories' => $categories,
@@ -95,7 +95,7 @@ class HomeController extends Controller
 
         $categories = $categoryTreeMaker->getCategoryTree();
 
-        return $this->render('home/index.html.twig', array(
+        return $this->render('home/home.html.twig', array(
             'products' => $result,
             'cart' => $this->get('session')->get('items'),
             'categories' => $categories,

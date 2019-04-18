@@ -1,0 +1,8 @@
+<div class="product">
+  <a href="/product/{{product.id}}"><div class="product_photo" style="background-image: url('/img/products/{{product.id}}.jpg')"></div></a>
+  <div class="product_labels">
+    <div class="product_name">{{product.name}}</div>
+    <div class="product_price">{{product.price}}</div>
+    <a href="/cart/add-to-cart/{{ product.id }}"><button class="add_to_cart" type="button" name="add_to_cart">Dodaj do koszyka</button></a>
+  </div>
+</div>

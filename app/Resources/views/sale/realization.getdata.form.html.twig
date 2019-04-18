@@ -1,0 +1,60 @@
+<div class='form-temp'>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+</div>
+<style>
+  .form-temp{
+    width: 500px;
+    display: flex;
+    margin: auto;
+    margin-top: 70px;
+  }
+  .form-temp form div div{
+    display: flex;
+    margin-bottom: 5px;
+  }
+    .form-temp form div div label{
+      width: 30%;
+      float: left;
+    }
+    .form-temp form div div input{
+      width: 70%;
+      float: left;
+    }
+    .form-temp form div div:nth-child(9){
+      display: flex;
+      flex-direction: column;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId{
+      display: flex;
+      flex-direction: column;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId input{
+      margin-top: 20px;
+      width: 40px;
+      float: left;
+    }
+    .form-temp form div div:nth-child(9) #realization_shipmentId label{
+      width: 500px;
+      float: left;
+    }
+    #realization_Podsumowanie{
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 5px 30px;
+      background-color: #C61819;
+      border: 2px solid #C61819;
+      color: #FFFFFF;
+      border-radius: 12px;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    #realization_Podsumowanie:hover{
+      background-color: #FFFFFF;
+      color: #C61819;
+    }
+
+</style>

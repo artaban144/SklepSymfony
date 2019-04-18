@@ -55,7 +55,7 @@ class SaleController extends Controller
             return $this->redirectToRoute('realization_summary');
         }
 
-        return $this->render('/sale/realization.get.data.html.twig', [
+        return $this->render('/sale/realization.getdata.html.twig', [
             'form' => $form->createView(),
         ]);
     }
